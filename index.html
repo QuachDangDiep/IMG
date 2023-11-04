@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image srcset attribute</title>
+    <!--
+    ## Trang wed sử dụng ít hình ảnh (tốc độ tải trang không bị ảnh hưởng nhiều bởi hình ảnh)   
+        Tối ưu sử dụng hinh ảnh trên trang wed?
+            1. Sử dụng định dạng ảnh phù hợp?
+                - Hình học, vector, v.v: SVG
+                - Bitmap transparent: PNG, WEBP
+                - Bitmap không transparent: JPEG, WEBP
+            2. Nén hình ảnh (giảm dung lượng)
+                - https://tinypng.com/    
+            3. Sử dụng kích thước ảnh phù hợp?
+                - Original: 4000px x 4000px, Figma: 800px x 800px (CSS), Resize: 1600px x 1600px (2x),
+                đáp ứng tốt cho acr màn hình PPI/DPI cao (retina)
+                - PPI (Pixel per inch), DPI (Dots per inch): 100 DPI, 300 DPI
+
+    Loại màn hình:
+        1. Màn hình thường (DPI thấp - 1:1): 800px x 800p ok , 1600px x 1600px thì không ok
+        2. Mần hình retina (DPI cao - 2:1): 800px x 800px ko ok, 1600px x 1600px thì ok  
+        
+    ## Trang wed sử dụng nhiều hình ảnh
+       Thiết bị :
+           1. Mobile:  1600px x 1600px thì không ok => tốn băng thông, chờ lâu hơn => Giảm trải nghiệm  
+           2. Tablet:  1600px x 1600px thì không ok  
+           3. Desktop: 1600px x 1600px thì ok  
+           
+           
+    ## Bài toán 1
+           1. Mobile: 50px x 50px
+           2. Tablet: 100px x 100px
+           3. Desktop: 200px x 200px   
+           
+    ## Bài toán 2
+           1. Desktop: 200px x 200px    
+           
+    ## Bài toán 3
+           1. Desktop: /img/ảnh-1.jpg
+           2. Mobile: /img/ảnh-2.jpg      
+    -->
+    <style>
+        .image {
+            width: 100%;
+        }
+    </style>
+    </head>
+    <body>
+        <!-- 1. Resolution switching: Different sizes -->
+        <!-- <img
+            srcset="./shazaf-zafar-Suk_omDtF4U-unsplash (1) (1).jpg 400w,
+                    ./shazaf-zafar-Suk_omDtF4U-unsplash (1) (2).jpg 200w, 
+                    ./shazaf-zafar-Suk_omDtF4U-unsplash (1) (3).jpg 100w,
+                    "
+            sizes="(max-width: 575px) 100px, (max-width: 991px) 200px, 400px"
+            src="shazaf-zafar-Suk_omDtF4U-unsplash (1) (1).jpg"
+            alt="Elva dressed as a fairy" 
+        /> -->
+
+        <!-- 2. Resolution switching: Same size, different resolutions -->
+        <!-- <img 
+            srcset="./shazaf-zafar-Suk_omDtF4U-unsplash (1) (2).jpg 1x, ./shazaf-zafar-Suk_omDtF4U-unsplash (1) (1).jpg 2x" 
+            src="./shazaf-zafar-Suk_omDtF4U-unsplash (1) (1).jpg" 
+            alt=""
+        /> -->
+
+        <!-- 3. Art direction -->
+        <picture>
+            <source 
+                media="(max-width: 575px)" srcset="./img-small.jpg" />
+            <img 
+                class="image"
+                src="./img-lager.jpg" 
+                alt="Chris standing up holding his daughter Elva" 
+            />
+          </picture>
+    </body>
+</html>
